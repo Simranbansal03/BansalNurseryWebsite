@@ -1,0 +1,207 @@
+import React, { useState, useEffect, useMemo } from "react";
+import AddProductForm from "../components/admin/AddProductForm";
+import EditProductForm from "../components/admin/EditProductForm";
+import AdminProductCard from "../components/admin/AdminProductCard";
+import productService from "../services/productService";
+// import { Link } from "react-router-dom";
+import "../App.css";
+import "./AdminDashboardPage.css";
+import { productCategoriesWithAll } from "../constants/categories";
+
+// Simple Modal Component
+const Modal = ({ isOpen, onClose, title, children }) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("modal-open-no-scroll");
+    } else {
+      document.body.classList.remove("modal-open-no-scroll");
+    }
+    return () => {
+      document.body.classList.remove("modal-open-no-scroll");
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-header">
+          <h2>{title}</h2>
+          <button onClick={onClose} className="modal-close-btn">
+            ×
+          </button>
+        </div>
+        <div className="modal-body">{children}</div>
+      </div>
+    </div>
+  );
+};
+
+const AdminDashboardPage = () => {
+  const [products, setProducts] = useState([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
+  const [errorProducts, setErrorProducts] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
+  const [isEditProductModalOpen, setIsEditProductModalOpen] = useState(false);
+  const [editingProductId, setEditingProductId] = useState(null);
+
+  const fetchAllProducts = async () => {
+    try {
+      setLoadingProducts(true);
+      const data = await productService.getAllProducts();
+      setProducts(data);
+      setErrorProducts(null);
+    } catch (err) {
+      console.error("Failed to fetch products for admin dashboard:", err);
+      setErrorProducts(err.message || "Failed to fetch products.");
+      setProducts([]);
+    } finally {
+      setLoadingProducts(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
+
+  const handleProductAdded = () => {
+    fetchAllProducts();
+    setIsAddProductModalOpen(false);
+  };
+
+  const handleProductUpdated = () => {
+    fetchAllProducts();
+    setIsEditProductModalOpen(false);
+    setEditingProductId(null);
+  };
+
+  const openAddProductModal = () => setIsAddProductModalOpen(true);
+  const closeAddProductModal = () => setIsAddProductModalOpen(false);
+
+  const openEditProductModal = (productId) => {
+    setEditingProductId(productId);
+    setIsEditProductModalOpen(true);
+  };
+  const closeEditProductModal = () => {
+    setIsEditProductModalOpen(false);
+    setEditingProductId(null);
+  };
+
+  const handleDeleteProduct = async (productId, productName) => {
+    if (
+      window.confirm(
+        `Are you sure you want to delete the product "${productName}"? This action cannot be undone.`
+      )
+    ) {
+      try {
+        await productService.deleteProduct(productId);
+        fetchAllProducts();
+      } catch (error) {
+        console.error(`Failed to delete product ${productId}:`, error);
+        alert(`Error deleting product: ${error.message}`);
+      }
+    }
+  };
+
+  const filteredProducts = useMemo(() => {
+    if (selectedCategory === "All") {
+      return products;
+    }
+    return products.filter((product) => product.category === selectedCategory);
+  }, [products, selectedCategory]);
+
+  return (
+    <div className="page-container admin-dashboard-container">
+      <div className="dashboard-header">
+        <h1>Admin Dashboard</h1>
+        <button
+          onClick={openAddProductModal}
+          className="btn btn-primary add-product-header-btn"
+        >
+          Add New Product
+        </button>
+      </div>
+      <p className="dashboard-subtitle">
+        Manage your nursery inventory and settings from here.
+      </p>
+
+      {isAddProductModalOpen && (
+        <Modal
+          isOpen={isAddProductModalOpen}
+          onClose={closeAddProductModal}
+          title="Add New Product"
+        >
+          <AddProductForm onProductAdded={handleProductAdded} />
+        </Modal>
+      )}
+
+      {isEditProductModalOpen && editingProductId && (
+        <Modal
+          isOpen={isEditProductModalOpen}
+          onClose={closeEditProductModal}
+          title={`Edit Product: ${
+            products.find((p) => p.id === editingProductId)?.name || ""
+          }`}
+        >
+          <EditProductForm
+            productId={editingProductId}
+            onProductUpdated={handleProductUpdated}
+            onClose={closeEditProductModal}
+          />
+        </Modal>
+      )}
+
+      <section className="admin-section product-management-section">
+        <div className="product-management-header">
+          <h2>Manage Products</h2>
+          <div className="category-filter-container">
+            <label htmlFor="category-filter">Filter by Category: </label>
+            <select
+              id="category-filter"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="category-filter-select"
+            >
+              {productCategoriesWithAll.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {loadingProducts && <p className="loading-text">Loading products...</p>}
+        {errorProducts && (
+          <p className="error-message">
+            Error fetching products: {errorProducts}
+          </p>
+        )}
+        {!loadingProducts && !errorProducts && (
+          <div className="admin-product-cards-grid">
+            {filteredProducts.length === 0 ? (
+              <p className="no-products-message full-width-message">
+                {selectedCategory === "All"
+                  ? "No products found. Click 'Add New Product' to get started!"
+                  : `No products found in the "${selectedCategory}" category.`}
+              </p>
+            ) : (
+              filteredProducts.map((product) => (
+                <AdminProductCard
+                  key={product.id}
+                  product={product}
+                  onDelete={handleDeleteProduct}
+                  onEdit={() => openEditProductModal(product.id)}
+                />
+              ))
+            )}
+          </div>
+        )}
+      </section>
+    </div>
+  );
+};
+
+export default AdminDashboardPage;

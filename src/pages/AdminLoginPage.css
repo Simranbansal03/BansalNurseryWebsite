@@ -1,0 +1,388 @@
+/* Admin Login Page Green Theme Styles */
+.new-admin-login-page {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    font-family: var(--font-family-main);
+    /* Use main font from App.css */
+}
+
+.login-left-panel {
+    flex-basis: 50%;
+    /* Lighter gradient with more visibility */
+    background: linear-gradient(135deg, #4a9c6d 0%, #e67e22 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+}
+
+.login-left-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Optional: Add a background image for the login panel */
+    background-image: url('../../public/images/plants-background.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+    /* Light opacity to show the gradient underneath */
+    z-index: 0;
+}
+
+.welcome-message {
+    font-size: 2.5em;
+    font-weight: 600;
+    color: white;
+    z-index: 1;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.login-right-panel {
+    flex-basis: 50%;
+    background-color: #f4f6f8;
+    /* Lighter background for the form side */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.login-form-container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    /* White form container */
+    padding: 40px 30px;
+    border-radius: var(--border-radius-main);
+    box-shadow: var(--box-shadow-medium);
+    text-align: center;
+    position: relative;
+}
+
+.back-to-home {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.back-to-home:hover {
+    color: var(--accent-color);
+    transform: translateX(-3px);
+}
+
+.login-form-container h2 {
+    font-size: 2.2em;
+    color: var(--text-color-dark);
+    /* Dark text for light background */
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.login-subtitle {
+    color: #555;
+    /* Slightly darker subtitle */
+    margin-bottom: 30px;
+    font-size: 0.95em;
+}
+
+.new-login-form .new-form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.new-login-form .new-form-group label {
+    display: block;
+    font-size: 0.9em;
+    color: var(--text-color-dark);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.new-login-form .new-form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    /* Lighter border */
+    border-radius: var(--border-radius-small);
+    font-size: 1em;
+    color: var(--text-color-dark);
+    background-color: #fdfdfd;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.new-login-form .new-form-group input::placeholder {
+    color: #999;
+}
+
+.new-login-form .new-form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.2);
+    /* Focus shadow with primary color */
+    background-color: #fff;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.85em;
+}
+
+.remember-me-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.remember-me-checkbox input[type="checkbox"] {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary-color);
+}
+
+.remember-me-checkbox label {
+    color: var(--text-color-dark);
+    font-weight: 500;
+}
+
+.forgot-password-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.forgot-password-link:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.new-login-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: var(--border-radius-small);
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.new-login-btn:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.new-login-btn:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+}
+
+.login-error {
+    color: var(--error-color);
+    background-color: rgba(231, 111, 81, 0.1);
+    padding: 10px;
+    border-radius: var(--border-radius-small);
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    border-left: 3px solid var(--error-color);
+}
+
+.alt-login.new-alt-login {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+}
+
+.alt-login.new-alt-login p {
+    color: #555;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+/* Google Sign In Button - Green Theme */
+.google-signin-btn.new-google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    background-color: #fff;
+    /* White background */
+    border: 1px solid var(--border-color, #ccc);
+    /* Use border-color from theme, fallback to #ccc */
+    border-radius: var(--border-radius-small);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 45px;
+    position: relative;
+    overflow: hidden;
+}
+
+.google-signin-btn.new-google-btn:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.google-signin-btn.new-google-btn:active {
+    background-color: #f9f9f9;
+}
+
+.google-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 43px;
+    /* Adjusted for border */
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-right: 1px solid var(--border-color, #ccc);
+}
+
+.google-icon-svg {
+    width: 18px;
+    height: 18px;
+}
+
+.google-text {
+    color: var(--text-color-dark, #333);
+    font-size: 14px;
+    font-weight: 500;
+    /* Ensure text is not overlapped by icon wrapper */
+    margin-left: 45px;
+    /* Should be slightly more than icon wrapper width */
+    font-family: var(--font-family-body);
+    /* Consistent font */
+}
+
+.google-signin-btn.new-google-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+
+/* Removed character-illustration-container and character-img styles */
+
+/* Remove old styles or ensure they don't conflict */
+.admin-login-page:not(.new-admin-login-page) {
+    /* display: none; */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .login-left-panel {
+        display: none;
+    }
+
+    .login-right-panel {
+        flex-basis: 100%;
+        justify-content: center;
+        background-color: #f4f6f8;
+        /* Ensure consistent background */
+    }
+
+    /* Removed character illustration responsive styles */
+    .login-form-container {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        /* Softer shadow on mobile */
+        padding: 30px 20px;
+        margin: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-form-container h2 {
+        font-size: 1.8em;
+    }
+
+    .new-login-form .new-form-group input {
+        padding: 10px 12px;
+        font-size: 0.95em;
+    }
+
+    .new-login-btn {
+        padding: 12px;
+        font-size: 1em;
+    }
+
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* Removed character illustration responsive styles */
+}
+
+/* Old styles cleanup */
+.login-container:not(.login-form-container) {}
+
+.login-form:not(.new-login-form) {}
+
+.form-group:not(.new-form-group) {}
+
+.login-btn:not(.new-login-btn) {}
+
+.google-signin-btn:not(.new-google-btn) {}
+
+.admin-notice {
+    font-size: 1.1rem;
+    margin-top: 15px;
+    font-weight: normal;
+    line-height: 1.5;
+    opacity: 1;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(255, 255, 255, 0.25);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    position: relative;
+}
+
+.translation {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.translation.hindi {
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 10px;
+}
+
+.translation.kannada {
+    font-family: 'Arial', sans-serif;
+}

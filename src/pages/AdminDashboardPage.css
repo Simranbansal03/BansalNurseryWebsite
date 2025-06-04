@@ -1,0 +1,393 @@
+.admin-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.add-product-section {
+    margin-bottom: 40px;
+}
+
+.product-management-section h2 {
+    margin-bottom: 20px;
+    color: #34495e;
+}
+
+.admin-product-list-container {
+    overflow-x: auto;
+    /* Allows table to be scrollable on small screens */
+}
+
+.admin-product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.95em;
+}
+
+.admin-product-table th,
+.admin-product-table td {
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.admin-product-table th {
+    background-color: #f4f6f8;
+    /* Lightest grey from App.css */
+    color: #333;
+    font-weight: bold;
+}
+
+.admin-product-thumbnail {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.actions-cell {
+    text-align: center;
+    white-space: nowrap;
+    /* Prevents buttons from wrapping */
+}
+
+.action-btn {
+    padding: 6px 12px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    /* For proper spacing and alignment */
+    transition: opacity 0.2s ease;
+}
+
+.action-btn:hover {
+    opacity: 0.85;
+}
+
+.edit-btn {
+    background-color: #3498db;
+    /* Blue */
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    /* Red */
+}
+
+.error-message {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.admin-dashboard-container {
+    padding: 25px;
+    background-color: #f8f9fa;
+    /* A light, neutral background for admin areas */
+    min-height: calc(100vh - var(--navbar-height, 60px));
+    color: var(--text-color-primary);
+    /* Default text color for the page */
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--border-color-light, #e0e0e0);
+}
+
+.dashboard-header h1 {
+    color: var(--neutral-color-dark, #343a40);
+    /* Darker text for main heading */
+    font-size: 2.2rem;
+    /* Slightly adjusted size */
+    margin: 0;
+    font-weight: 600;
+}
+
+.add-product-header-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    /* Slightly adjusted padding */
+    border: none;
+    border-radius: var(--border-radius-standard);
+    font-size: 0.95rem;
+    /* Slightly adjusted size */
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.add-product-header-btn:hover {
+    background-color: var(--primary-color-dark);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-subtitle {
+    font-size: 1rem;
+    /* Slightly adjusted size */
+    color: var(--text-color-secondary, #6c757d);
+    /* Softer color for subtitle */
+    margin-bottom: 35px;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Standard overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 25px 30px;
+    /* Adjusted padding */
+    border-radius: var(--border-radius-large, 8px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 650px;
+    /* Slightly adjusted max-width */
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color-light, #e0e0e0);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    /* Adjusted size */
+    color: var(--neutral-color-dark, #343a40);
+    font-weight: 600;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    /* Adjusted size */
+    font-weight: normal;
+    color: var(--text-color-secondary, #6c757d);
+    cursor: pointer;
+    padding: 0 5px;
+    line-height: 1;
+}
+
+.modal-close-btn:hover {
+    color: var(--neutral-color-dark, #343a40);
+}
+
+.modal-body {
+    /* Styles for the content area of the modal if needed */
+}
+
+/* Styles for form layout inside the modal */
+.modal-form-layout .form-grid {
+    /* Adjust grid if needed for modal context */
+}
+
+.modal-form-layout .submit-product-btn {
+    width: auto;
+    padding: 10px 25px;
+    /* Adjusted padding */
+    margin-top: 25px;
+    /* Increased margin */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.95rem;
+}
+
+/* Product Management Section */
+.product-management-section {
+    background-color: #ffffff;
+    padding: 20px 25px;
+    /* Adjusted padding */
+    border-radius: var(--border-radius-large, 8px);
+    box-shadow: var(--card-shadow-light, 0 2px 10px rgba(0, 0, 0, 0.07));
+    margin-bottom: 30px;
+}
+
+.product-management-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    /* Added padding */
+    border-bottom: 1px solid var(--border-color-extralight, #f1f1f1);
+    /* Softer border */
+}
+
+.product-management-header h2 {
+    color: var(--neutral-color-dark, #343a40);
+    font-size: 1.5rem;
+    /* Adjusted size */
+    margin: 0;
+    font-weight: 600;
+}
+
+.category-filter-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Adjusted gap */
+}
+
+.category-filter-container label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    /* Adjusted size */
+    color: var(--text-color-primary, #495057);
+}
+
+.category-filter-select {
+    padding: 8px 12px;
+    border: 1px solid var(--border-color-medium, #ced4da);
+    border-radius: var(--border-radius-standard, 4px);
+    font-size: 0.9rem;
+    min-width: 170px;
+    /* Adjusted width */
+    background-color: white;
+    color: var(--text-color-primary);
+}
+
+/* Table Styles (will be replaced/adjusted for cards) */
+.admin-product-list-container {
+    /* Add styling for the card grid container here */
+}
+
+.admin-product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-product-table th,
+.admin-product-table td {
+    border: 1px solid var(--border-color-light);
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.admin-product-table th {
+    background-color: var(--light-gray-accent);
+    /* Light green accent for table header */
+    color: var(--primary-color-dark);
+    font-weight: 600;
+}
+
+.admin-product-thumbnail {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: var(--border-radius-small);
+    border: 1px solid var(--border-color-light);
+}
+
+.actions-cell {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.action-btn {
+    padding: 6px 12px;
+    border-radius: var(--border-radius-standard);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    opacity: 0.8;
+}
+
+.edit-btn {
+    background-color: var(--info-color);
+    /* A blue for edit */
+    color: white;
+    border: 1px solid var(--info-color-dark);
+}
+
+.delete-btn {
+    background-color: var(--danger-color);
+    /* A red for delete */
+    color: white;
+    border: 1px solid var(--danger-color-dark);
+}
+
+/* Text utility classes */
+.loading-text {
+    font-style: italic;
+    color: var(--text-color-secondary, #6c757d);
+    padding: 20px;
+    text-align: center;
+}
+
+.error-message {
+    color: var(--danger-color-dark, #721c24);
+    background-color: var(--danger-background-light, #f8d7da);
+    padding: 15px;
+    border-radius: var(--border-radius-standard, 4px);
+    border: 1px solid var(--danger-color, #f5c6cb);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.no-products-message {
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 1rem;
+    color: var(--text-color-secondary, #6c757d);
+    background-color: var(--neutral-background-light, #e9ecef);
+    /* Lighter neutral bg */
+    border-radius: var(--border-radius-standard, 4px);
+    border: 1px dashed var(--border-color-medium, #ced4da);
+}
+
+/* Product Cards Grid */
+.admin-product-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    /* Adjusted minmax */
+    gap: 20px;
+    /* Adjusted gap */
+    margin-top: 20px;
+}
+
+/* Style for the no-products message when it's in the grid context */
+.no-products-message.full-width-message {
+    grid-column: 1 / -1;
+}

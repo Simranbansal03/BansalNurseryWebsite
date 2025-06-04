@@ -1,0 +1,538 @@
+/* General Page Styles for Homepage */
+.homepage.page-container {
+    padding-top: 0;
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: var(--background-color);
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: var(--primary-color);
+    padding: 100px 10% 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    min-height: 600px;
+    gap: 40px;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../public/images/hero-plants.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.4;
+    z-index: 0;
+}
+
+.hero-content {
+    max-width: 500px;
+    z-index: 2;
+    position: relative;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.hero-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.hero-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background-color: #d04d14;
+}
+
+.hero-image {
+    display: none;
+    /* Hide the original image container since we're using background image */
+}
+
+/* Benefits Section */
+.benefits-section {
+    padding: 50px 10%;
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    background-color: white;
+}
+
+.benefit-item {
+    flex: 1;
+    text-align: center;
+    padding: 30px;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateY(-5px);
+}
+
+.benefit-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.benefit-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.benefit-item p {
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Products Section */
+.products-section {
+    padding: 80px 10% 100px;
+    background-color: var(--secondary-color);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.section-header p {
+    color: #666;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.category-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border-radius: 30px;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    font-family: var(--font-family-body);
+    font-weight: 500;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.loading-spinner-container {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(10, 71, 46, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.error-message,
+.no-products-message {
+    text-align: center;
+    padding: 30px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow-light);
+    color: var(--error-color);
+}
+
+.no-products-message {
+    color: var(--text-color);
+}
+
+/* Plant Care Section */
+.plant-care-section {
+    padding: 80px 10%;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.plant-care-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../public/images/plants-care.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.4;
+    z-index: 0;
+}
+
+.plant-care-content {
+    max-width: 500px;
+    position: relative;
+    z-index: 2;
+}
+
+.plant-care-content h2 {
+    font-size: 2.8rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.plant-care-content p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    opacity: 0.9;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.care-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.care-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background-color: #d04d14;
+}
+
+.plant-care-image {
+    display: none;
+    /* Hide the original image container since we're using background image */
+}
+
+/* Care Tips Section */
+.care-tips-section {
+    padding: 80px 10%;
+    text-align: center;
+    background-color: var(--secondary-color);
+}
+
+.care-tips-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.care-tips-section>p {
+    color: #666;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 50px;
+}
+
+.care-tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.care-tip-item {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow-light);
+    text-align: left;
+    transition: transform 0.3s ease;
+}
+
+.care-tip-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-medium);
+}
+
+.care-tip-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(10, 71, 46, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.care-tip-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.care-tip-item p {
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Search Bar Styles */
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.search-bar {
+    position: relative;
+    width: 100%;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 45px 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 10px rgba(10, 71, 46, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+.clear-search-btn {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.clear-search-btn:hover {
+    color: var(--primary-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .plant-care-content h2 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .hero-section,
+    .plant-care-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 5%;
+    }
+
+    .hero-content,
+    .plant-care-content {
+        max-width: 100%;
+        margin-bottom: 40px;
+    }
+
+    /* Center the buttons in mobile view */
+    .hero-button,
+    .care-button {
+        display: inline-block;
+    }
+
+    .benefits-section {
+        flex-direction: column;
+        padding: 40px 5%;
+        gap: 20px;
+    }
+
+    .benefit-item {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .products-section,
+    .care-tips-section {
+        padding: 60px 5%;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-button {
+        padding: 12px 25px;
+        font-size: 1rem;
+    }
+
+    .section-header h2,
+    .plant-care-content h2,
+    .care-tips-section h2 {
+        font-size: 2rem;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+
+    .care-tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .benefit-icon {
+        font-size: 2rem;
+    }
+
+    .benefit-item h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .section-header h2,
+    .plant-care-content h2,
+    .care-tips-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .category-filters {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .filter-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    /* Two column layout for mobile */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .benefit-item {
+        padding: 15px;
+    }
+
+    .benefit-icon {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    .benefit-item h3 {
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+
+    .benefit-item p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+}

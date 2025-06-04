@@ -1,0 +1,215 @@
+/* src/components/Navbar.css */
+
+/* General Navbar styles */
+.navbar {
+    background-color: var(--primary-color);
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.navbar-scrolled {
+    padding: 0.8rem 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.nav-logo {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: var(--font-family-main);
+    transition: transform 0.3s ease;
+}
+
+.nav-logo:hover {
+    transform: translateY(-2px);
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 25px;
+    position: relative;
+}
+
+.nav-links a,
+.nav-logout-btn {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 0;
+    position: relative;
+}
+
+.nav-links a::after,
+.nav-logout-btn::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after,
+.nav-logout-btn:hover::after {
+    width: 100%;
+}
+
+.nav-logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    font-family: var(--font-family-body);
+}
+
+/* WhatsApp Contact Button */
+.whatsapp-contact-btn {
+    background-color: #25D366;
+    color: white !important;
+    padding: 8px 16px !important;
+    border-radius: 20px;
+    font-weight: 600 !important;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.whatsapp-contact-btn::before {
+    content: "📱 ";
+    margin-right: 5px;
+}
+
+.whatsapp-contact-btn:hover {
+    background-color: #128C7E;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.whatsapp-contact-btn::after {
+    display: none !important;
+}
+
+/* Cart Icon Styles */
+.cart-link {
+    display: flex;
+    align-items: center;
+}
+
+.cart-icon {
+    font-size: 1.3rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 0.75rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+/* Mobile Menu Styles */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--primary-color);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.mobile-menu-open {
+        max-height: 300px;
+        padding: 1rem 0;
+    }
+
+    .nav-links li {
+        width: 100%;
+        margin: 0;
+        padding: 0.5rem 2rem;
+    }
+
+    .nav-links a,
+    .nav-logout-btn {
+        display: block;
+        width: 100%;
+        padding: 0.8rem 0;
+    }
+
+    .nav-links a::after,
+    .nav-logout-btn::after {
+        display: none;
+    }
+
+    .nav-links a.active {
+        color: var(--accent-color);
+    }
+
+    .whatsapp-contact-btn {
+        margin: 0.5rem 0;
+        width: auto;
+        display: inline-block;
+        text-align: center;
+    }
+}

@@ -1,5 +1,305 @@
+/* Define Nature-Inspired Color Palette and Modern Typography */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #0A472E;
+  /* Deep forest green for primary elements */
+  --secondary-color: #F5F2E9;
+  /* Cream background color */
+  --accent-color: #E65C1D;
+  /* Orange accent for buttons and CTAs */
+  --text-color: #0A472E;
+  /* Dark green for text on light backgrounds */
+  --text-color-dark: #0A472E;
+  /* Dark text for consistency */
+  --background-color: #F5F2E9;
+  /* Cream background for main areas */
+  --card-background: #FFFFFF;
+  /* White for cards and product items */
+  --border-color: #E8E1D4;
+  /* Light beige for subtle borders */
+  --success-color: #0A472E;
+  /* Success actions in primary green */
+  --error-color: #E65C1D;
+  /* Error in accent orange */
+  --link-color: #0A472E;
+  /* Links in primary green */
+  --link-hover-color: #3D7A63;
+  /* Lighter green for hovering */
+
+  --font-family-main: 'Playfair Display', serif;
+  /* Elegant serif for headings */
+  --font-family-body: 'Poppins', sans-serif;
+  /* Clean sans-serif for body */
+
+  --box-shadow-light: 0 4px 12px rgba(10, 71, 46, 0.08);
+  --box-shadow-medium: 0 8px 24px rgba(10, 71, 46, 0.12);
+  --border-radius-main: 1rem;
+  --border-radius-small: 0.5rem;
+}
+
+/* Global Resets and Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family-body);
+  color: var(--text-color);
+  background-color: var(--background-color);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  top: 0 !important;
+  /* Fix for Google Translate shifting the body */
+  position: static !important;
+}
+
+/* General App Styles */
 .App {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: var(--text-color);
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: var(--primary-color);
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--box-shadow-light);
+}
+
+.nav-logo {
+  color: white;
+  font-size: 1.8em;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: var(--font-family-main);
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 25px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover {
+  opacity: 0.85;
+}
+
+/* Styling for the logout button in navbar */
+.nav-logout-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-family: var(--font-family-body);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.nav-logout-btn:hover {
+  opacity: 0.85;
+}
+
+/* Main Content Styles */
+.main-content {
+  flex-grow: 1;
+  padding: 0;
+  background-color: var(--background-color);
+}
+
+.main-content-full-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-container {
+  background-color: var(--background-color);
+  padding: 25px;
+  border-radius: var(--border-radius-main);
+  max-width: 1200px;
+  margin: 20px auto;
+  text-align: left;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-color);
+  margin-bottom: 0.75em;
+  line-height: 1.3;
+  font-weight: 600;
+  font-family: var(--font-family-main);
+}
+
+h1 {
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 2rem 1rem;
   text-align: center;
+  font-size: 0.9em;
+  margin-top: auto;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* Link Styles */
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--link-hover-color);
+}
+
+/* Button Styles */
+button,
+.btn-primary,
+.btn-secondary,
+.btn-danger {
+  font-family: var(--font-family-body);
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: white;
+  box-shadow: var(--box-shadow-light);
+}
+
+.btn-primary:hover {
+  background-color: #d04d14;
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow-medium);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(10, 71, 46, 0.1);
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background-color: var(--error-color);
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #d04d14;
+  transform: translateY(-2px);
+}
+
+/* Form Elements */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-small);
+  font-family: var(--font-family-body);
+  font-size: 1rem;
+  color: var(--text-color);
+  background-color: white;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(10, 71, 46, 0.2);
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.error-message {
+  color: var(--error-color);
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.success-message {
+  color: var(--success-color);
+  padding: 10px;
+  margin-bottom: 15px;
 }
 
 .App-logo {
@@ -32,7 +332,10 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
 }
+
+/* Google Translate Widget Fixes - Removed */
