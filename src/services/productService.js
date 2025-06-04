@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/products"; // Updated API endpoint
+const API_URL =
+  process.env.REACT_APP_BACKEND_API_URL || "http://localhost:5000/api/products"; // Use environment variable for API endpoint
 
 // Fetch all products
 const getAllProducts = async () => {
