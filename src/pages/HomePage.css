@@ -407,6 +407,14 @@
     color: var(--primary-color);
 }
 
+/* Products count info */
+.products-count {
+    text-align: center;
+    color: var(--text-color-secondary, #6c757d);
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 1200px) {
     .hero-content h1 {
@@ -487,6 +495,10 @@
 
     .benefit-item h3 {
         font-size: 1.2rem;
+    }
+
+    .products-count {
+        font-size: 0.8rem;
     }
 }
 

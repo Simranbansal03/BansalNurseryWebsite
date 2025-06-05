@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import AddProductForm from "../components/admin/AddProductForm";
 import EditProductForm from "../components/admin/EditProductForm";
 import AdminProductCard from "../components/admin/AdminProductCard";
+import Pagination from "../components/Pagination";
 import productService from "../services/productService";
 // import { Link } from "react-router-dom";
 import "../App.css";
@@ -50,6 +51,8 @@ const AdminDashboardPage = () => {
   const [isAddProductModalOpen, setIsAddProductModalOpen] = useState(false);
   const [isEditProductModalOpen, setIsEditProductModalOpen] = useState(false);
   const [editingProductId, setEditingProductId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(12); // Default to desktop view
 
   const fetchAllProducts = async () => {
     try {
@@ -69,6 +72,27 @@ const AdminDashboardPage = () => {
   useEffect(() => {
     fetchAllProducts();
   }, []);
+
+  // Set products per page based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setProductsPerPage(window.innerWidth <= 768 ? 8 : 12);
+    };
+
+    // Set initial value
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Clean up
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Reset to first page when category changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory]);
 
   const handleProductAdded = () => {
     fetchAllProducts();
@@ -115,6 +139,23 @@ const AdminDashboardPage = () => {
     }
     return products.filter((product) => product.category === selectedCategory);
   }, [products, selectedCategory]);
+
+  // Get current page products
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    // Scroll to top of product section
+    document
+      .querySelector(".product-management-section")
+      .scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="page-container admin-dashboard-container">
@@ -184,24 +225,44 @@ const AdminDashboardPage = () => {
           </p>
         )}
         {!loadingProducts && !errorProducts && (
-          <div className="admin-product-cards-grid">
-            {filteredProducts.length === 0 ? (
-              <p className="no-products-message full-width-message">
-                {selectedCategory === "All"
-                  ? "No products found. Click 'Add New Product' to get started!"
-                  : `No products found in the "${selectedCategory}" category.`}
-              </p>
-            ) : (
-              filteredProducts.map((product) => (
-                <AdminProductCard
-                  key={product.id}
-                  product={product}
-                  onDelete={handleDeleteProduct}
-                  onEdit={() => openEditProductModal(product.id)}
+          <>
+            <div className="admin-product-cards-grid">
+              {filteredProducts.length === 0 ? (
+                <p className="no-products-message full-width-message">
+                  {selectedCategory === "All"
+                    ? "No products found. Click 'Add New Product' to get started!"
+                    : `No products found in the "${selectedCategory}" category.`}
+                </p>
+              ) : (
+                currentProducts.map((product) => (
+                  <AdminProductCard
+                    key={product.id}
+                    product={product}
+                    onDelete={handleDeleteProduct}
+                    onEdit={() => openEditProductModal(product.id)}
+                  />
+                ))
+              )}
+            </div>
+
+            {/* Only show pagination if there are products and more than one page */}
+            {filteredProducts.length > 0 && totalPages > 1 && (
+              <>
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
                 />
-              ))
+
+                {/* Products count info */}
+                <div className="products-count">
+                  Showing {indexOfFirstProduct + 1}-
+                  {Math.min(indexOfLastProduct, filteredProducts.length)} of{" "}
+                  {filteredProducts.length} products
+                </div>
+              </>
             )}
-          </div>
+          </>
         )}
       </section>
     </div>

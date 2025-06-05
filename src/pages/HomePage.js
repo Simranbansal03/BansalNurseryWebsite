@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import productService from "../services/productService";
 import ProductCard from "../components/ProductCard";
+import Pagination from "../components/Pagination";
 import { productCategoriesWithAll } from "../constants/categories";
 import { Link } from "react-router-dom";
 import "./HomePage.css";
@@ -11,6 +12,8 @@ const HomePage = () => {
   const [error, setError] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(12); // Default to desktop view
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -31,6 +34,27 @@ const HomePage = () => {
     };
     fetchProducts();
   }, []);
+
+  // Set products per page based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setProductsPerPage(window.innerWidth <= 768 ? 8 : 12);
+    };
+
+    // Set initial value
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Clean up
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, searchTerm]);
 
   const filteredProducts = useMemo(() => {
     // First filter by category
@@ -55,6 +79,23 @@ const HomePage = () => {
 
     return result;
   }, [products, selectedCategory, searchTerm]);
+
+  // Get current page products
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    // Scroll to products section
+    document
+      .getElementById("products-section")
+      .scrollIntoView({ behavior: "smooth" });
+  };
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -167,11 +208,27 @@ const HomePage = () => {
         )}
 
         {!loading && !error && filteredProducts.length > 0 && (
-          <div className="product-grid">
-            {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          <>
+            <div className="product-grid">
+              {currentProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+
+            {/* Pagination */}
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+
+            {/* Products count info */}
+            <div className="products-count">
+              Showing {indexOfFirstProduct + 1}-
+              {Math.min(indexOfLastProduct, filteredProducts.length)} of{" "}
+              {filteredProducts.length} products
+            </div>
+          </>
         )}
       </section>
 

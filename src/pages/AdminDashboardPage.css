@@ -399,6 +399,15 @@
     grid-column: 1 / -1;
 }
 
+/* Products count info */
+.products-count {
+    text-align: center;
+    color: var(--text-color-secondary, #6c757d);
+    font-size: 0.9rem;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
 
@@ -443,5 +452,9 @@
 
     .modal-header h2 {
         font-size: 1.4rem;
+    }
+
+    .products-count {
+        font-size: 0.8rem;
     }
 }
