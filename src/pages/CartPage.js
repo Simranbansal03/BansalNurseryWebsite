@@ -58,7 +58,7 @@ const CartPage = () => {
       return;
     }
 
-    const nurseryPhoneNumber = "7014682701";
+    const nurseryPhoneNumber = "9549416150";
     if (nurseryPhoneNumber === "91XXXXXXXXXX") {
       alert("WhatsApp number not configured by the developer yet.");
       return;
