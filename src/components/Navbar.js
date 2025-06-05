@@ -72,6 +72,18 @@ const Navbar = () => {
             </Link>
           </div>
 
+          {/* Contact Us button - always visible on desktop */}
+          <div className="contact-btn-container desktop-only">
+            <a
+              href={whatsappUrl}
+              className="whatsapp-contact-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Contact Us
+            </a>
+          </div>
+
           {/* Hamburger menu button - only show when menu is closed */}
           {!mobileMenuOpen && (
             <div className="mobile-menu-toggle" onClick={toggleMobileMenu}>
@@ -112,7 +124,7 @@ const Navbar = () => {
               Products
             </a>
           </li>
-          <li>
+          <li className="mobile-only">
             <a
               href={whatsappUrl}
               className="whatsapp-contact-btn"
@@ -169,16 +181,6 @@ const Navbar = () => {
             }
           >
             Products
-          </a>
-        </li>
-        <li>
-          <a
-            href={whatsappUrl}
-            className="whatsapp-contact-btn"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Contact Us
           </a>
         </li>
         {currentUser && (

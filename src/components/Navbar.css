@@ -109,11 +109,12 @@
     align-items: center;
     transition: all 0.3s ease !important;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
 }
 
+/* Remove the icon from the contact button */
 .whatsapp-contact-btn::before {
-    content: "📱 ";
-    margin-right: 5px;
+    display: none;
 }
 
 .whatsapp-contact-btn:hover {
@@ -124,6 +125,11 @@
 
 .whatsapp-contact-btn::after {
     display: none !important;
+}
+
+/* Contact button container */
+.contact-btn-container {
+    margin-right: 20px;
 }
 
 /* Cart Icon Styles */
@@ -180,9 +186,9 @@
 .mobile-menu-overlay {
     position: fixed;
     top: 0;
-    right: -100%;
-    width: 80%;
-    max-width: 300px;
+    right: -300px;
+    width: 250px;
+    max-width: 80%;
     height: 100vh;
     background-color: var(--primary-color);
     z-index: 1002;
@@ -251,10 +257,22 @@
     .desktop-nav-links {
         display: none;
     }
+
+    .desktop-only {
+        display: none;
+    }
+
+    .mobile-only {
+        display: block;
+    }
 }
 
 @media (min-width: 769px) {
     .mobile-menu-overlay {
+        display: none;
+    }
+
+    .mobile-only {
         display: none;
     }
 }
