@@ -21,11 +21,6 @@ const CartPage = () => {
     return getCartTotal() >= MINIMUM_ORDER_VALUE;
   };
 
-  // Helper to get/set customer name in sessionStorage
-  const getCustomerName = () => sessionStorage.getItem("customerName") || "";
-  const setCustomerName = (name) =>
-    sessionStorage.setItem("customerName", name);
-
   const handleQuantityChange = (id, quantity) => {
     const numQuantity = parseInt(quantity, 10);
     if (numQuantity >= 1) {
@@ -35,8 +30,8 @@ const CartPage = () => {
     }
   };
 
-  const generateWhatsAppMessage = (customerName) => {
-    let message = `Hello Bansal Nursery, my name is ${customerName}. I'd like to order the following items:\n\n`;
+  const generateWhatsAppMessage = () => {
+    let message = `Hello Bansal Nursery, I'd like to order the following items:\n\n`;
     cartItems.forEach((item) => {
       message += `${item.name} (x${item.quantity}) - ₹${(
         item.price * item.quantity
@@ -58,23 +53,13 @@ const CartPage = () => {
       return;
     }
 
-    const nurseryPhoneNumber = "7014682701";
+    const nurseryPhoneNumber = "919549416150";
     if (nurseryPhoneNumber === "91XXXXXXXXXX") {
       alert("WhatsApp number not configured by the developer yet.");
       return;
     }
-    let customerName = getCustomerName();
-    if (!customerName) {
-      customerName = prompt(
-        "Please enter your name to personalize your order:"
-      );
-      if (!customerName || !customerName.trim()) {
-        alert("Name is required to place an order via WhatsApp.");
-        return;
-      }
-      setCustomerName(customerName.trim());
-    }
-    const message = generateWhatsAppMessage(customerName);
+
+    const message = generateWhatsAppMessage();
     const whatsappUrl = `https://wa.me/${nurseryPhoneNumber}?text=${message}`;
     window.open(whatsappUrl, "_blank");
   };

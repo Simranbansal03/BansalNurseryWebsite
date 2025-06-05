@@ -46,28 +46,116 @@ const Navbar = () => {
   };
 
   // WhatsApp contact link
-  const whatsappNumber = "917014682701"; // Format: country code + number without +
+  const whatsappNumber = "919549416150"; // Format: country code + number without +
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20products.`;
 
   return (
     <nav className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
-      <Link to="/" className="nav-logo">
-        Bansal Nursery
-      </Link>
+      <div className="navbar-container">
+        <Link to="/" className="nav-logo">
+          Bansal Nursery
+        </Link>
 
-      <div className="mobile-menu-toggle" onClick={toggleMobileMenu}>
-        <span></span>
-        <span></span>
-        <span></span>
+        <div className="navbar-right">
+          {/* Cart icon - always visible */}
+          <div className="cart-link-container">
+            <Link
+              to="/cart"
+              className={`cart-icon ${
+                location.pathname === "/cart" ? "active" : ""
+              }`}
+            >
+              🛒
+              {cartItemCount > 0 && (
+                <span className="cart-count">{cartItemCount}</span>
+              )}
+            </Link>
+          </div>
+
+          {/* Hamburger menu button */}
+          <div className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
       </div>
 
-      <ul className={`nav-links ${mobileMenuOpen ? "mobile-menu-open" : ""}`}>
+      {/* Mobile menu overlay */}
+      <div className={`mobile-menu-overlay ${mobileMenuOpen ? "show" : ""}`}>
+        <div className="mobile-menu-header">
+          <button className="close-menu-btn" onClick={toggleMobileMenu}>
+            ✕
+          </button>
+        </div>
+
+        <ul className="mobile-nav-links">
+          <li>
+            <Link
+              to="/"
+              className={location.pathname === "/" ? "active" : ""}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <a
+              href="/#products-section"
+              className={
+                location.pathname === "/#products-section" ? "active" : ""
+              }
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Products
+            </a>
+          </li>
+          <li>
+            <a
+              href={whatsappUrl}
+              className="whatsapp-contact-btn"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Contact Us
+            </a>
+          </li>
+          {currentUser && (
+            <li>
+              <Link
+                to="/admin"
+                className={location.pathname.includes("/admin") ? "active" : ""}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Dashboard
+              </Link>
+            </li>
+          )}
+          {currentUser ? (
+            <li>
+              <button onClick={handleLogout} className="nav-logout-btn">
+                Logout
+              </button>
+            </li>
+          ) : (
+            <li>
+              <Link
+                to="/admin/login"
+                className={location.pathname === "/admin/login" ? "active" : ""}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Admin
+              </Link>
+            </li>
+          )}
+        </ul>
+      </div>
+
+      {/* Desktop navigation links */}
+      <ul className="desktop-nav-links">
         <li>
-          <Link
-            to="/"
-            className={location.pathname === "/" ? "active" : ""}
-            onClick={() => setMobileMenuOpen(false)}
-          >
+          <Link to="/" className={location.pathname === "/" ? "active" : ""}>
             Home
           </Link>
         </li>
@@ -77,7 +165,6 @@ const Navbar = () => {
             className={
               location.pathname === "/#products-section" ? "active" : ""
             }
-            onClick={() => setMobileMenuOpen(false)}
           >
             Products
           </a>
@@ -88,7 +175,6 @@ const Navbar = () => {
             className="whatsapp-contact-btn"
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => setMobileMenuOpen(false)}
           >
             Contact Us
           </a>
@@ -98,7 +184,6 @@ const Navbar = () => {
             <Link
               to="/admin"
               className={location.pathname.includes("/admin") ? "active" : ""}
-              onClick={() => setMobileMenuOpen(false)}
             >
               Dashboard
             </Link>
@@ -115,26 +200,11 @@ const Navbar = () => {
             <Link
               to="/admin/login"
               className={location.pathname === "/admin/login" ? "active" : ""}
-              onClick={() => setMobileMenuOpen(false)}
             >
               Admin
             </Link>
           </li>
         )}
-        <li className="cart-link">
-          <Link
-            to="/cart"
-            className={`cart-icon ${
-              location.pathname === "/cart" ? "active" : ""
-            }`}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            🛒
-            {cartItemCount > 0 && (
-              <span className="cart-count">{cartItemCount}</span>
-            )}
-          </Link>
-        </li>
       </ul>
     </nav>
   );
