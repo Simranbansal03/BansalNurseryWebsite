@@ -81,10 +81,15 @@
     transition: width 0.3s ease;
 }
 
+/* Only show underline on hover, not for active state */
 .desktop-nav-links a:hover::after,
-.desktop-nav-links a.active::after,
 .desktop-nav-links .nav-logout-btn:hover::after {
     width: 100%;
+}
+
+/* Add a different style for active links instead of underline */
+.desktop-nav-links a.active {
+    font-weight: 700;
 }
 
 .nav-logout-btn {
