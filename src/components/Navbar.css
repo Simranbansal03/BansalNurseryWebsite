@@ -255,6 +255,20 @@
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+    .navbar {
+        padding: 0.8rem 1rem;
+        /* Reduced padding for mobile */
+    }
+
+    .navbar-scrolled {
+        padding: 0.6rem 1rem;
+    }
+
+    .nav-logo {
+        font-size: 1.5rem;
+        /* Smaller logo text for mobile */
+    }
+
     .mobile-menu-toggle {
         display: flex;
     }
@@ -269,6 +283,41 @@
 
     .mobile-only {
         display: block;
+    }
+
+    /* Improve cart icon visibility */
+    .cart-icon {
+        font-size: 1.5rem;
+    }
+
+    .cart-count {
+        top: -10px;
+        right: -10px;
+        width: 22px;
+        height: 22px;
+    }
+
+    /* Improve mobile menu usability */
+    .mobile-nav-links a,
+    .mobile-nav-links .nav-logout-btn {
+        padding: 16px 20px;
+        /* Larger touch targets */
+        font-size: 1.1rem;
+        /* Larger text */
+    }
+
+    /* Make WhatsApp button more prominent */
+    .mobile-nav-links .whatsapp-contact-btn {
+        margin: 15px 20px;
+        text-align: center;
+        padding: 12px !important;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 320px) {
+    .nav-logo {
+        font-size: 1.3rem;
     }
 }
 

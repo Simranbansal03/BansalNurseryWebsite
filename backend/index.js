@@ -3,11 +3,11 @@ const dotenv = require("dotenv");
 const admin = require("firebase-admin");
 const cors = require("cors");
 
-// TODO: Make sure the path to the service account key is correct.
-// It should be in the backend directory and named serviceAccountKey.json
-const serviceAccount = require("./serviceAccountKey.json");
-
+// Load environment variables from .env file in development
 dotenv.config();
+
+// Initialize Firebase Admin SDK using credentials from environment variable
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),

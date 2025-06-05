@@ -8,6 +8,8 @@
     flex-direction: column;
     overflow: hidden;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    height: 100%;
+    /* Ensure consistent height */
 }
 
 .admin-product-card:hover {
@@ -45,12 +47,17 @@
 }
 
 .admin-product-card-name {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
+    /* Slightly smaller font for better mobile display */
     color: var(--neutral-color-dark, #343a40);
     margin-top: 0;
     margin-bottom: 6px;
     font-weight: 600;
     line-height: 1.3;
+    /* Add ellipsis for long names */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .admin-product-card-category,
@@ -82,7 +89,8 @@
 
 .admin-card-action-btn {
     flex-grow: 1;
-    padding: 8px 12px;
+    padding: 8px 0;
+    /* Reduced horizontal padding for mobile */
     border-radius: var(--border-radius-standard, 4px);
     text-decoration: none;
     font-size: 0.85rem;
@@ -115,4 +123,42 @@
     background-color: var(--danger-color, #e4606d);
     color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Media queries for better mobile responsiveness */
+@media (max-width: 768px) {
+    .admin-product-card {
+        margin-bottom: 0;
+        /* Remove any margin bottom if present */
+    }
+
+    .admin-product-card-image-container {
+        padding-top: 56.25%;
+        /* 16:9 aspect ratio for mobile */
+    }
+
+    .admin-product-card-content {
+        padding: 12px;
+    }
+
+    .admin-product-card-actions {
+        padding: 0 12px 12px 12px;
+    }
+
+    .admin-card-action-btn {
+        padding: 10px 0;
+        /* Larger touch target for mobile */
+    }
+}
+
+/* For very small screens */
+@media (max-width: 320px) {
+    .admin-product-card-name {
+        font-size: 1rem;
+    }
+
+    .admin-product-card-category,
+    .admin-product-card-price {
+        font-size: 0.8rem;
+    }
 }

@@ -339,3 +339,58 @@ select:focus {
 }
 
 /* Google Translate Widget Fixes - Removed */
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+
+  /* Adjust page container padding */
+  .page-container {
+    padding: 15px;
+    margin: 10px auto;
+  }
+
+  /* Adjust headings for mobile */
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.7em;
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  /* Adjust buttons for better touch targets */
+  button,
+  .btn-primary,
+  .btn-secondary,
+  .btn-danger {
+    padding: 0.8rem 1.2rem;
+    min-height: 44px;
+    /* Minimum touch target size */
+  }
+
+  /* Fix for modals on mobile */
+  .modal-open-no-scroll {
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 320px) {
+  .page-container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+}
