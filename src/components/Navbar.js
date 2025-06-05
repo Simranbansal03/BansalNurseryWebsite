@@ -46,7 +46,7 @@ const Navbar = () => {
   };
 
   // WhatsApp contact link
-  const whatsappNumber = "917014682701"; // Format: country code + number without +
+  const whatsappNumber = "919549416150"; // Format: country code + number without +
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20products.`;
 
   return (
