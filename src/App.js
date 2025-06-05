@@ -47,6 +47,11 @@ const Layout = ({ children }) => {
             reserved.
             <br />
             <strong>Address:</strong> Jaipur, Rajasthan
+            <br />
+            <strong>Contact us at:</strong>{" "}
+            <a href="tel:9460721868">9460721868</a>,{" "}
+            <a href="tel:9509274190">9509274190</a>,{" "}
+            <a href="tel:9549416150">9549416150</a>
           </p>
         </footer>
       )}
