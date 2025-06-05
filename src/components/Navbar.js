@@ -72,12 +72,14 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Hamburger menu button */}
-          <div className="mobile-menu-toggle" onClick={toggleMobileMenu}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          {/* Hamburger menu button - only show when menu is closed */}
+          {!mobileMenuOpen && (
+            <div className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          )}
         </div>
       </div>
 
