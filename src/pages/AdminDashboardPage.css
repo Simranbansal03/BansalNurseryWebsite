@@ -248,26 +248,62 @@
     align-items: center;
     margin-bottom: 20px;
     padding-bottom: 15px;
-    border-bottom: 1px solid var(--border-color-extralight, #f1f1f1);
     flex-wrap: wrap;
-    /* Allow wrapping on small screens */
-    gap: 10px;
-    /* Add gap between wrapped elements */
+    gap: 15px;
+    border-bottom: 1px solid var(--border-color-light, #e0e0e0);
+}
+
+.product-management-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.view-toggle-buttons {
+    display: flex;
+    border: 1px solid var(--border-color-light, #e0e0e0);
+    border-radius: var(--border-radius-standard, 4px);
+    overflow: hidden;
+}
+
+.view-toggle-btn {
+    background: #f8f9fa;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    color: var(--text-color-secondary, #6c757d);
+}
+
+.view-toggle-btn:first-child {
+    border-right: 1px solid var(--border-color-light, #e0e0e0);
+}
+
+.view-toggle-btn.active {
+    background: var(--primary-color, #4caf50);
+    color: white;
+}
+
+.view-toggle-btn:hover:not(.active) {
+    background: #e9ecef;
 }
 
 .product-management-header h2 {
-    color: var(--neutral-color-dark, #343a40);
-    font-size: 1.5rem;
     margin: 0;
+    font-size: 1.4rem;
+    color: var(--neutral-color-dark, #343a40);
     font-weight: 600;
 }
 
 .category-filter-container {
     display: flex;
     align-items: center;
-    gap: 8px;
     flex-wrap: wrap;
-    /* Allow wrapping on very small screens */
+    gap: 10px;
 }
 
 .category-filter-container label {
@@ -292,67 +328,69 @@
     /* Add styling for the card grid container here */
 }
 
+.admin-product-list-view {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
 .admin-product-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin-top: 15px;
+    font-size: 0.95em;
 }
 
 .admin-product-table th,
 .admin-product-table td {
-    border: 1px solid var(--border-color-light);
-    padding: 12px 15px;
+    border: 1px solid #ddd;
+    padding: 10px 12px;
     text-align: left;
     vertical-align: middle;
 }
 
 .admin-product-table th {
-    background-color: var(--light-gray-accent);
-    /* Light green accent for table header */
-    color: var(--primary-color-dark);
-    font-weight: 600;
+    background-color: #f4f6f8;
+    color: #333;
+    font-weight: bold;
 }
 
 .admin-product-thumbnail {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
-    border-radius: var(--border-radius-small);
-    border: 1px solid var(--border-color-light);
+    border-radius: 4px;
+    border: 1px solid #eee;
 }
 
 .actions-cell {
-    display: flex;
-    gap: 10px;
-    align-items: center;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .action-btn {
     padding: 6px 12px;
-    border-radius: var(--border-radius-standard);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: opacity 0.2s ease;
+    margin: 0 5px;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
+    font-size: 0.9em;
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    transition: opacity 0.2s ease;
 }
 
 .action-btn:hover {
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
 .edit-btn {
-    background-color: var(--info-color);
-    /* A blue for edit */
-    color: white;
-    border: 1px solid var(--info-color-dark);
+    background-color: #3498db;
 }
 
 .delete-btn {
-    background-color: var(--danger-color);
-    /* A red for delete */
-    color: white;
-    border: 1px solid var(--danger-color-dark);
+    background-color: #e74c3c;
 }
 
 /* Text utility classes */
@@ -411,7 +449,7 @@
 /* Media Queries for Responsive Design */
 @media (max-width: 768px) {
 
-    /* Dashboard Header */
+    /* Mobile styles */
     .dashboard-header {
         flex-direction: column;
         align-items: flex-start;
@@ -419,12 +457,16 @@
 
     .add-product-header-btn {
         width: 100%;
-        /* Full width button on mobile */
         text-align: center;
     }
 
-    /* Product Management Header */
     .product-management-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-management-controls {
+        width: 100%;
         flex-direction: column;
         align-items: flex-start;
     }
@@ -435,26 +477,35 @@
     }
 
     .category-filter-select {
-        flex-grow: 1;
-        min-width: 0;
-        /* Allow select to shrink if needed */
+        width: 100%;
     }
 
-    /* Product Cards Grid - Single column on very small screens */
+    .view-toggle-buttons {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .view-toggle-btn {
+        flex: 1;
+        justify-content: center;
+    }
+
     .admin-product-cards-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(1, 1fr);
+        /* Single column on mobile */
     }
 
-    /* Modal Content */
     .modal-content {
-        padding: 15px;
+        max-height: 85vh;
+        /* Slightly smaller on mobile */
     }
 
     .modal-header h2 {
         font-size: 1.4rem;
+        /* Smaller heading on mobile */
     }
 
     .products-count {
-        font-size: 0.8rem;
+        text-align: center;
     }
 }

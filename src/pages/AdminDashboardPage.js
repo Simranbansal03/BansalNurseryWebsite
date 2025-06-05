@@ -8,6 +8,7 @@ import productService from "../services/productService";
 import "../App.css";
 import "./AdminDashboardPage.css";
 import { productCategoriesWithAll } from "../constants/categories";
+import { FaThLarge, FaList } from "react-icons/fa";
 
 // Simple Modal Component
 const Modal = ({ isOpen, onClose, title, children }) => {
@@ -53,6 +54,7 @@ const AdminDashboardPage = () => {
   const [editingProductId, setEditingProductId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(12); // Default to desktop view
+  const [viewMode, setViewMode] = useState("grid"); // 'grid' or 'list'
 
   const fetchAllProducts = async () => {
     try {
@@ -201,20 +203,42 @@ const AdminDashboardPage = () => {
       <section className="admin-section product-management-section">
         <div className="product-management-header">
           <h2>Manage Products</h2>
-          <div className="category-filter-container">
-            <label htmlFor="category-filter">Filter by Category: </label>
-            <select
-              id="category-filter"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="category-filter-select"
-            >
-              {productCategoriesWithAll.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
+          <div className="product-management-controls">
+            <div className="view-toggle-buttons">
+              <button
+                className={`view-toggle-btn ${
+                  viewMode === "grid" ? "active" : ""
+                }`}
+                onClick={() => setViewMode("grid")}
+                aria-label="Grid View"
+              >
+                <FaThLarge /> Grid
+              </button>
+              <button
+                className={`view-toggle-btn ${
+                  viewMode === "list" ? "active" : ""
+                }`}
+                onClick={() => setViewMode("list")}
+                aria-label="List View"
+              >
+                <FaList /> List
+              </button>
+            </div>
+            <div className="category-filter-container">
+              <label htmlFor="category-filter">Filter by Category: </label>
+              <select
+                id="category-filter"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="category-filter-select"
+              >
+                {productCategoriesWithAll.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
 
@@ -226,24 +250,98 @@ const AdminDashboardPage = () => {
         )}
         {!loadingProducts && !errorProducts && (
           <>
-            <div className="admin-product-cards-grid">
-              {filteredProducts.length === 0 ? (
-                <p className="no-products-message full-width-message">
-                  {selectedCategory === "All"
-                    ? "No products found. Click 'Add New Product' to get started!"
-                    : `No products found in the "${selectedCategory}" category.`}
-                </p>
-              ) : (
-                currentProducts.map((product) => (
-                  <AdminProductCard
-                    key={product.id}
-                    product={product}
-                    onDelete={handleDeleteProduct}
-                    onEdit={() => openEditProductModal(product.id)}
-                  />
-                ))
-              )}
-            </div>
+            {viewMode === "grid" ? (
+              <div className="admin-product-cards-grid">
+                {filteredProducts.length === 0 ? (
+                  <p className="no-products-message full-width-message">
+                    {selectedCategory === "All"
+                      ? "No products found. Click 'Add New Product' to get started!"
+                      : `No products found in the "${selectedCategory}" category.`}
+                  </p>
+                ) : (
+                  currentProducts.map((product) => (
+                    <AdminProductCard
+                      key={product.id}
+                      product={product}
+                      onDelete={handleDeleteProduct}
+                      onEdit={() => openEditProductModal(product.id)}
+                    />
+                  ))
+                )}
+              </div>
+            ) : (
+              <div className="admin-product-list-view">
+                {filteredProducts.length === 0 ? (
+                  <p className="no-products-message full-width-message">
+                    {selectedCategory === "All"
+                      ? "No products found. Click 'Add New Product' to get started!"
+                      : `No products found in the "${selectedCategory}" category.`}
+                  </p>
+                ) : (
+                  <table className="admin-product-table">
+                    <thead>
+                      <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {currentProducts.map((product) => (
+                        <tr key={product.id}>
+                          <td>
+                            <img
+                              src={
+                                product.imageUrls &&
+                                product.imageUrls.length > 0
+                                  ? product.imageUrls[0]
+                                  : product.imageUrl ||
+                                    "https://via.placeholder.com/150x150?text=No+Image"
+                              }
+                              alt={product.name}
+                              className="admin-product-thumbnail"
+                              onError={(e) => {
+                                if (
+                                  e.target.src !==
+                                  "https://via.placeholder.com/150x150?text=No+Image"
+                                ) {
+                                  e.target.onerror = null;
+                                  e.target.src =
+                                    "https://via.placeholder.com/150x150?text=No+Image";
+                                }
+                              }}
+                            />
+                          </td>
+                          <td>{product.name}</td>
+                          <td>{product.category}</td>
+                          <td>
+                            ₹{product.price ? product.price.toFixed(2) : "N/A"}
+                          </td>
+                          <td className="actions-cell">
+                            <button
+                              onClick={() => openEditProductModal(product.id)}
+                              className="action-btn edit-btn"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              onClick={() =>
+                                handleDeleteProduct(product.id, product.name)
+                              }
+                              className="action-btn delete-btn"
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+            )}
 
             {/* Only show pagination if there are products and more than one page */}
             {filteredProducts.length > 0 && totalPages > 1 && (
