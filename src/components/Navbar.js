@@ -45,6 +45,12 @@ const Navbar = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  // Function to handle home navigation and scroll to top
+  const handleHomeClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setMobileMenuOpen(false);
+  };
+
   // WhatsApp contact link
   const whatsappNumber = "919549416150"; // Format: country code + number without +
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hello,%20I%20would%20like%20to%20inquire%20about%20your%20products.`;
@@ -52,7 +58,7 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
       <div className="navbar-container">
-        <Link to="/" className="nav-logo">
+        <Link to="/" className="nav-logo" onClick={handleHomeClick}>
           Bansal Nursery
         </Link>
 
@@ -108,7 +114,7 @@ const Navbar = () => {
             <Link
               to="/"
               className={location.pathname === "/" ? "active" : ""}
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={handleHomeClick}
             >
               Home
             </Link>
@@ -169,7 +175,11 @@ const Navbar = () => {
       {/* Desktop navigation links */}
       <ul className="desktop-nav-links">
         <li>
-          <Link to="/" className={location.pathname === "/" ? "active" : ""}>
+          <Link
+            to="/"
+            className={location.pathname === "/" ? "active" : ""}
+            onClick={handleHomeClick}
+          >
             Home
           </Link>
         </li>
