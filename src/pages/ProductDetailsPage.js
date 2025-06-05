@@ -6,6 +6,7 @@ import "./ProductDetailsPage.css"; // For specific styling for this page
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // Import carousel styles
 import { Carousel } from "react-responsive-carousel"; // Import Carousel component
 import { useCart } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
 const ProductDetailsPage = () => {
   const { productId } = useParams(); // Get productId from URL
@@ -53,9 +54,9 @@ const ProductDetailsPage = () => {
     return (
       <div className="page-container">
         <div className="error-message">Error: {error}</div>
-        <a href="/#products-section" className="back-to-products-link">
+        <Link to="/" className="back-to-products-link">
           Back to All Products
-        </a>
+        </Link>
       </div>
     );
   }
@@ -64,9 +65,9 @@ const ProductDetailsPage = () => {
     return (
       <div className="page-container">
         <div className="error-message">Product not found.</div>
-        <a href="/#products-section" className="back-to-products-link">
+        <Link to="/" className="back-to-products-link">
           Back to All Products
-        </a>
+        </Link>
       </div>
     );
   }
@@ -91,11 +92,26 @@ const ProductDetailsPage = () => {
     });
   };
 
+  // Format description text if it exists
+  const formatDescription = (description) => {
+    if (!description) return null;
+
+    // Check if description is already properly formatted
+    if (description.includes("<br>") || description.includes("\n")) {
+      // Replace <br> tags or newlines with proper paragraph breaks
+      return description
+        .split(/(?:<br>|\n)+/)
+        .map((paragraph, index) => <p key={index}>{paragraph.trim()}</p>);
+    }
+
+    return <p>{description}</p>;
+  };
+
   return (
     <div className="page-container product-details-container">
-      <a href="/#products-section" className="back-to-products-link">
+      <Link to="/" className="back-to-products-link">
         Back to All Products
-      </a>
+      </Link>
       <div className="product-details-content">
         <div className="product-details-image-container">
           <div className="modern-carousel-container">
@@ -105,7 +121,7 @@ const ProductDetailsPage = () => {
                 showThumbs={imagesToDisplay.length > 1}
                 dynamicHeight={false}
                 infiniteLoop={true}
-                autoPlay={true}
+                autoPlay={false}
                 interval={3500}
                 showStatus={false}
                 renderArrowPrev={(onClickHandler, hasPrev, label) =>
@@ -195,7 +211,7 @@ const ProductDetailsPage = () => {
           {product.description && (
             <div className="product-description">
               <h3>Description</h3>
-              <p>{product.description}</p>
+              {formatDescription(product.description)}
             </div>
           )}
 
