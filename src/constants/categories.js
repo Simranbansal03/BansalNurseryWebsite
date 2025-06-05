@@ -3,6 +3,7 @@ export const productCategories = [
   "Plants",
   "Summer Bulbs",
   "Winter Bulbs",
+  "All-Season Bulbs",
   "Seeds",
   "Adeniums",
   "Rain-Lillies",

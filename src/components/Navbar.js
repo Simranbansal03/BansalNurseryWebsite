@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext"; // Adjust path if necessary
 import { useCart } from "../context/CartContext"; // Import useCart
@@ -11,6 +11,7 @@ const Navbar = () => {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef(null);
 
   // Calculate total items in cart
   const cartItemCount = cartItems.reduce(
@@ -32,6 +33,25 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        mobileMenuOpen &&
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target) &&
+        !event.target.closest(".mobile-menu-toggle")
+      ) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [mobileMenuOpen]);
 
   const handleLogout = async () => {
     try {
@@ -102,9 +122,16 @@ const Navbar = () => {
       </div>
 
       {/* Mobile menu overlay */}
-      <div className={`mobile-menu-overlay ${mobileMenuOpen ? "show" : ""}`}>
+      <div
+        ref={mobileMenuRef}
+        className={`mobile-menu-overlay ${mobileMenuOpen ? "show" : ""}`}
+      >
         <div className="mobile-menu-header">
-          <button className="close-menu-btn" onClick={toggleMobileMenu}>
+          <button
+            className="close-menu-btn"
+            onClick={toggleMobileMenu}
+            aria-label="Close menu"
+          >
             ✕
           </button>
         </div>
